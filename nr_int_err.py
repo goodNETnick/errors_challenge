@@ -6,6 +6,7 @@ import time
 import os
 import datetime
 import getpass
+import argparse
 
 def np_get_info(task: Task):
     """
@@ -20,11 +21,17 @@ def np_get_info(task: Task):
     task.host["int_counters"] = int_counters.result['get_interfaces_counters']
 
 if __name__ == "__main__":
-    update_time = 10
+    parser = argparse.ArgumentParser(description="A simple script to find errors on network device interfaces")
+    parser.add_argument("-t", dest="update_time", default=10, type=int, help="Refresh timeout")
+    parser.add_argument("-g", dest="ans_group", default='cisco_routers', help="Ansible device group")
+    args = parser.parse_args()
+
+    update_time = args.update_time
+    ans_group = args.ans_group
     dev_access_pswd = getpass.getpass()
     start_time = datetime.datetime.now()
-    ans_group = 'cisco_routers'
     intrst_stats = ['rx_errors', 'rx_discards', 'tx_errors', 'tx_discards']
+
     # Collect baselline info (to date the script starts)
     nr = InitNornir(config_file="config.yaml")
     nr.inventory.defaults.password = dev_access_pswd
