@@ -1,0 +1,24 @@
+---
+all:
+  children:
+    cisco_routers:
+      hosts:
+        192.168.6.204:
+          ansible_connection: network_cli
+          ansible_network_os: ios
+          ansible_user: cisco
+          ask_pass: 'true'
+          ntp_server: 10.10.10.123
+        192.168.6.205:
+          ansible_connection: network_cli
+          ansible_network_os: ios
+          ansible_user: cisco
+          ask_pass: 'true'
+          ntp_server: 10.10.10.123
+        192.168.6.206:
+          ansible_connection: network_cli
+          ansible_network_os: ios
+          ansible_user: cisco
+          ask_pass: 'true'
+          ntp_server: 10.10.10.123
+    ungrouped: {}

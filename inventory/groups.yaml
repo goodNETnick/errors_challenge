@@ -1,0 +1,4 @@
+---
+cisco_routers:
+  platform: ios
+  username: cisco
